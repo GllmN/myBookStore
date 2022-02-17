@@ -1,0 +1,93 @@
+<mat-card class="mat-elevation-z10">
+  <mat-card-title style="text-align: center">
+    <h1>
+      <mat-icon>auto_stories</mat-icon>
+      Enregister un nouveau livre
+    </h1>
+  </mat-card-title>
+
+  <form *ngIf="bookForm" [formGroup]="bookForm" (ngSubmit)="onSaveBook()">
+    <mat-form-field appearance="fill">
+      <mat-label>Titre</mat-label>
+      <input matInput type="text" id="title" name="title" class="form-control" formControlName="title" required>
+      <mat-icon matSuffix>book</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Auteur</mat-label>
+      <input matInput type="text" id="author" name="author" class="form-control" formControlName="author" required>
+      <mat-icon matSuffix>history_edu</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Choisissez une date</mat-label>
+      <input
+        placeholder="Date de publication"
+        id="published"
+        name="published"
+        class="form-control"
+        formControlName="published"
+        matInput
+        [matDatepicker]="$any(picker)"
+
+        required>
+      <!--        [max]="maxYear"-->
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker color="primary" #picker startView="multi-year"></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-chip-list" appearance="fill">
+      <mat-label>Liste de tags</mat-label>
+      <mat-chip-list selectable multiple #chipList formControlName="listTag" id="listTag">
+        <mat-chip color="primary" #chip="matChip" *ngFor="let tag of tags" (removed)="deleteTag(tag)">
+          {{tag}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input placeholder="Ajouter un tag..."
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="addTag($event)">
+      </mat-chip-list>
+    </mat-form-field>
+    <div>
+      <mat-label>Illustration du livre</mat-label>
+
+      <!--      <choose-file layout="row">-->
+      <!--        <input id="fileInput" type="file" class="ng-hide">-->
+      <!--        <md-input-container flex class="md-block">-->
+      <!--          <input type="text" ng-model="fileName" disabled>-->
+      <!--          <div class="hint">Select your file</div>-->
+      <!--        </md-input-container>-->
+      <!--        <div>-->
+      <!--          <md-button id="uploadButton" class="md-fab md-mini">-->
+      <!--            <md-icon class="material-icons">attach_file</md-icon>-->
+      <!--          </md-button>-->
+      <!--        </div>-->
+      <!--      </choose-file>-->
+
+
+
+      <!--             class="form-control"-->
+      <button mat-flat-button color="primary" aria-label="...">
+        <input accept="image/*"
+               type="file"
+               onclick="this.value=null"
+               (change)="detectFiles($event)"
+               class="ng-hide"
+               id="photo"
+               name="photo"
+               formControlName="photo">
+        <mat-icon>file_download</mat-icon>
+      </button>
+      <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" *ngIf="this.isAddBook == true" [disabled]="bookForm.invalid" >Ajouter</button>
+
+    <button mat-raised-button color="primary" type="submit" *ngIf="this.isAddBook == false" [disabled]="bookForm.invalid" >Modifier</button>
+  </form>
+</mat-card>
+

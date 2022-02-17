@@ -1,0 +1,43 @@
+<mat-card class="mat-elevation-z12">
+  <mat-card-title style="text-align: center">
+    <span>
+      <mat-icon>auto_stories</mat-icon>
+      XevLabsBooks
+    </span>
+  </mat-card-title>
+  <mat-tab-group mat-stretch-tabs class="exemple-streched-tabs">
+    <mat-tab label="S'inscrire">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSaveUserProfil()">
+        <mat-form-field appearance="fill">
+          <input matInput type="text" id="username" placeholder="Nom de l'utilisateur" name="username" class="form-control" formControlName="username">
+          <!--          <mat-error *ngIf="errorMessage">Veuillez rentrer un nom</mat-error>-->
+          <mat-icon matSuffix>face</mat-icon>
+        </mat-form-field>
+        <div>
+          <mat-form-field appearance="fill">
+            <input matInput type="text" id="email" placeholder="Email" name="email" class="form-control" formControlName="email" required>
+            <mat-icon matSuffix>email</mat-icon>
+            <!--            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="fill">
+          <input matInput type="password" id="password" placeholder="Mot de passe" class="form-control" formControlName="password" required autocomplete="on">
+          <mat-icon matSuffix>lock</mat-icon>
+          <!--          <mat-error *ngIf="password.error.required">Veuillez rentrer un nom.</mat-error>-->
+          <!--          <mat-error *ngIf="password.error.minlength">Le mot de passe doit comprendre au moins 6 caractères.</mat-error>-->
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <input matInput type="password" id="confirmPassword" placeholder="Confirmation du mot de passe" class="form-control" formControlName="confirmPassword" required autocomplete="on">
+          <mat-icon matSuffix>lock</mat-icon>
+          <!--          <mat-error *ngIf="confirmPassword"></mat-error>-->
+        </mat-form-field>
+        <!--        <mat-error *ngIf="signUpForm?error?.['passwordsDontMatch']">-->
+        <!--          Les mots de passe doivent être identique.-->
+        <!--        </mat-error>&ndash;&gt;-->
+        <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">Créer mon compte</button>
+      </form>
+      <mat-error *ngIf="errorMessage" style="text-align: center"> {{errorMessage}}</mat-error>
+    </mat-tab>
+    <!--    <mat-tab label="Se connecter" routerLink="/signin" routerLinkActive="active"></mat-tab>-->
+  </mat-tab-group>
+</mat-card>

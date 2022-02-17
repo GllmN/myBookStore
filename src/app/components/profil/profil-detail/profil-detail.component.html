@@ -1,0 +1,15 @@
+<mat-card class="mat-elevation-z10">
+  <mat-card-title style="text-align: center">
+    <h1>
+      <mat-icon>auto_stories</mat-icon>
+      Votre profil
+    </h1>
+  </mat-card-title>
+  <h3><strong>Nom de l'utilisateur : </strong> {{user.username}}</h3>
+  <h3><strong>Email : </strong> {{user.email}}</h3>
+  <h3><strong>Photo de profil : </strong></h3>
+  <span>
+    <button mat-raised-button color="primary" (click)="onBack()">Retour aux livres</button>
+    <!--    <button mat-raised-button color="accent" routerLink="/book-form/{{idBook}}">Modifier</button>-->
+  </span>
+</mat-card>

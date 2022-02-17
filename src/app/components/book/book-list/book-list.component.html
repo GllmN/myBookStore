@@ -1,0 +1,43 @@
+<app-profil-view></app-profil-view>
+<mat-card class="mat-elevation-z10">
+  <mat-card-title style="text-align: center">
+    <h1>
+      <mat-icon>auto_stories</mat-icon>
+      Mes livres
+    </h1>
+  </mat-card-title>
+  <table *ngIf="books!.length != 0">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Titres</th>
+      <th>Auteurs</th>
+      <th class="actions">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of books; let i = index">
+      <td>{{i+1}}</td>
+      <td><b>{{book.payload.doc.data().title}}</b></td>
+      <td>{{book.payload.doc.data().author}}</td>
+      <td>
+            <span>
+              <mat-icon color="primary" routerLink="/book-form/{{book.payload.doc.id}}">edit</mat-icon>
+            </span>
+        <span>
+              <mat-icon routerLink="/book-detail/{{book.payload.doc.id}}">search</mat-icon>
+            </span>
+        <span>
+              <mat-icon color="warn" (click)="onDeleteBook(book)">delete</mat-icon>
+            </span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="message" *ngIf="books.length == 0">
+    <h4>Vous n'avez enregistrer aucun livre</h4>
+  </div>
+  <button mat-raised-button color="primary" (click)="onCreateNewBook()">
+    Ajouter un nouveau livre
+  </button>
+</mat-card>

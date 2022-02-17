@@ -1,0 +1,23 @@
+mat-card {
+  width: 40%;
+  margin: 50px auto 100px auto;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin: 10px auto;
+  border-radius: 8px;
+}
+
+button {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  display: none;
+}

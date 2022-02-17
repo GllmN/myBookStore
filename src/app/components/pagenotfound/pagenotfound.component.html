@@ -1,0 +1,11 @@
+<mat-card class="mat-elevation-z12">
+  <h1><b>Erreur 404</b></h1>
+  <h2>Oops!</h2>
+  <p>La page que vous cherchez n'existe pas.</p>
+  <div routerLinkActive="active" *ngIf="!isConnected">
+    <a mat-raised-button color="accent" routerLink="signin">Retour à la page de connexion</a>
+  </div>
+  <div routerLinkActive="active" *ngIf="isConnected">
+    <a mat-raised-button color="accent" routerLink="../book-list">Retour à la liste de livre</a>
+  </div>
+</mat-card>>

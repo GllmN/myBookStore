@@ -1,0 +1,22 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>
+    <mat-icon>auto_stories</mat-icon>
+    MyBookStore
+  </span>
+  <div class="spacer-left"></div>
+  <div routerLinkActive="active" *ngIf="isConnected; then connected; else notConnected">
+  </div>
+  <ng-template routerLinkActive="active" #connected>
+    <a mat-button routerLink="book-list">MES LIVRES</a>
+    <a mat-button routerLink="book-form">AJOUTER</a>
+    <a mat-button routerLink="profil-detail/{{idDocUser}}">VOIR MON PROFIL</a>
+    <div class="spacer-central"></div>
+    <a mat-raised-button color="link" (click)="onSignOut()" >Déconnexion</a>
+  </ng-template>
+  <ng-template routerLinkActive="active" #notConnected>
+    <div class="spacer-central"></div>
+    <a mat-button routerLink="signup">Créer un compte</a>
+    <a mat-raised-button color="accent" routerLink="signin">Connexion</a>
+  </ng-template>
+</mat-toolbar>
+

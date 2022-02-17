@@ -1,0 +1,46 @@
+mat-card {
+  width: 40%;
+  margin: 20px auto 100px auto;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+table {
+  margin: 30px auto;
+  width: 100%;
+}
+
+th {
+  font-size: large;
+  font-weight: inherit;
+  color: grey;
+  border-bottom: 1px solid grey;
+  border-collapse: separate;
+  border-spacing: 5px 5px;
+  padding-bottom: 10px;
+}
+
+td {
+  text-align: center;
+  padding-top: 10px;
+}
+
+span {
+  padding: 5px;
+}
+
+button {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions {
+  width: 130px;
+}
+
+.message {
+  margin: 20px auto 30px auto;
+  text-align: center;
+}
