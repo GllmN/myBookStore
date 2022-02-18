@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "mybookstore-56d1a": {
+      "hosting": {
+        "myBookStore": [
+          "mybookstore-56d1a"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "mybookstore-56d1a"
+  }
+}
