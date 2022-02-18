@@ -10,7 +10,7 @@ import { BookDetailComponent } from "./components/book/book-detail/book-detail.c
 import { PagenotfoundComponent } from "./components/pagenotfound/pagenotfound.component";
 import { ProfilDetailComponent} from "./components/profil/profil-detail/profil-detail.component";
 import { ProfilFormComponent} from "./components/profil/profil-form/profil-form.component";
-import {ProfilViewComponent} from "./components/profil/profil-view/profil-view.component";
+import { ProfilViewComponent } from "./components/profil/profil-view/profil-view.component";
 
 const routes: Routes = [
   {path: 'signup', component: SignUpComponent},

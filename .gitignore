@@ -47,3 +47,6 @@ Thumbs.db
 .runtimeconfig.json
 /src/app/services/form-validation.service.spec.ts
 /src/app/services/form-validation.service.ts
+/src/environments/
+/.firebaserc
+/firebase.json
