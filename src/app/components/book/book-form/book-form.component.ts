@@ -92,6 +92,7 @@ export class BookFormComponent implements OnInit {
                   'Philosophie', 'Science fiction', 'Top Seller',
                   'Coup coeur', 'Prix Goncourt']
                 this.initBookFormAdd()
+                console.log('test')
               }
             }
           );
@@ -110,6 +111,7 @@ export class BookFormComponent implements OnInit {
       author : [this.book.author,Validators.required],
       published : [this.book.published,Validators.required],
       listTag : [this.tags,Validators.required],
+      // pictureBook: [this.book.pictureBook,Validators.required]
     });
   }
 
@@ -121,7 +123,8 @@ export class BookFormComponent implements OnInit {
       title : ['',Validators.required],
       author : ['',Validators.required],
       published : ['',Validators.required],
-      listTag : [this.tags,Validators.required]
+      listTag : [this.tags,Validators.required],
+      // pictureBook : ['',Validators.required]
     });
   }
 
@@ -137,13 +140,14 @@ export class BookFormComponent implements OnInit {
       const author = this.bookForm.get('author')!.value;
       const published: Date = this.bookForm.get('published')!.value;
       const listTag = this.listOfTagsSelected();
+      const pictureBook = this.bookForm.get('pictureBook')!.value
 
-      const newBook = new Book(userUID,title,author,published,listTag);
+      const newBook = new Book(userUID,title,author,published,listTag,pictureBook);
       console.log('onSaveBook :', newBook)
 
       //
       if (this.fileUrl && this.fileUrl !== '') {
-        newBook.photo = this.fileUrl;
+        newBook.pictureBook = this.fileUrl;
       }
 
       // Send object to database and redirect to detail

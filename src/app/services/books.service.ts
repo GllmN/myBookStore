@@ -70,6 +70,7 @@ export class BooksService {
         author: book.author,
         published: book.published,
         listTag: book.listTag,
+        pictureBook: book.pictureBook,
       })
     //.then(() => alert(`Le livre ${book.title} a été ajouté`))
     //.catch((error) => alert("error: " + error));
@@ -89,6 +90,7 @@ export class BooksService {
         author: book.author,
         published: book.published,
         listTag: book.listTag,
+        pictureBook: book.pictureBook
       });
   }
 

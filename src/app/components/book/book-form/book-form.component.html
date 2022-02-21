@@ -29,7 +29,6 @@
         formControlName="published"
         matInput
         [matDatepicker]="$any(picker)"
-
         required>
       <!--        [max]="maxYear"-->
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -52,38 +51,6 @@
                (matChipInputTokenEnd)="addTag($event)">
       </mat-chip-list>
     </mat-form-field>
-    <div>
-      <mat-label>Illustration du livre</mat-label>
-
-      <!--      <choose-file layout="row">-->
-      <!--        <input id="fileInput" type="file" class="ng-hide">-->
-      <!--        <md-input-container flex class="md-block">-->
-      <!--          <input type="text" ng-model="fileName" disabled>-->
-      <!--          <div class="hint">Select your file</div>-->
-      <!--        </md-input-container>-->
-      <!--        <div>-->
-      <!--          <md-button id="uploadButton" class="md-fab md-mini">-->
-      <!--            <md-icon class="material-icons">attach_file</md-icon>-->
-      <!--          </md-button>-->
-      <!--        </div>-->
-      <!--      </choose-file>-->
-
-
-
-      <!--             class="form-control"-->
-      <button mat-flat-button color="primary" aria-label="...">
-        <input accept="image/*"
-               type="file"
-               onclick="this.value=null"
-               (change)="detectFiles($event)"
-               class="ng-hide"
-               id="photo"
-               name="photo"
-               formControlName="photo">
-        <mat-icon>file_download</mat-icon>
-      </button>
-      <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
-    </div>
 
     <button mat-raised-button color="primary" type="submit" *ngIf="this.isAddBook == true" [disabled]="bookForm.invalid" >Ajouter</button>
 

@@ -5,7 +5,7 @@ export class Book {
     public author: string,
     public published: Date,
     public listTag?: string[],
-    public photo?: string,
+    public pictureBook?: string,
     public id?: string,
     public payload?: any,
   ){}
