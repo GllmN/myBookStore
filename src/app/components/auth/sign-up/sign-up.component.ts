@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
+import {ProfilService} from "../../../services/profil.service";
 import {FormValidationService} from "../../../services/form-validation.service";
 import {User} from "../../../models/User.model";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {ProfilService} from "../../../services/profil.service";
+
 
 @Component({
   selector: 'app-sign-up',

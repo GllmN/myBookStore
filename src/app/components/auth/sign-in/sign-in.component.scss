@@ -19,9 +19,10 @@ mat-card {
 }
 
 mat-form-field, mat-checkbox {
-  width: 80%;
   display: block;
-  margin: 20px auto;
+  width: 90%;
+  height: 50px;
+  margin: 10px auto 0 auto;
 }
 
 mat-card-content {
@@ -30,6 +31,7 @@ mat-card-content {
 
 button {
   display: block;
-  width: 80%;
-  margin: 20px auto;
+  width: 90%;
+  height: 50px;
+  margin: 20px auto 20px auto;
 }

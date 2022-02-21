@@ -46,13 +46,11 @@ export class AuthService {
     return this.fireAuth.signInWithEmailAndPassword(email, password)
       .then(() => {
         console.log('Auth Service: loginUser: success');
+        return this.isConnected = true;
       })
       .catch(error => {
         console.log('Auth Service: login error...');
-        console.log('error code', error.code);
-        console.log('error', error);
-        // if (error.code)
-        //   return { isValid: false, message: error.code};
+          return error.code;
       });
   }
 
@@ -67,8 +65,6 @@ export class AuthService {
       })
       .catch(error => {
         console.log('Auth Service: logout error...');
-        console.log('error code', error.code);
-        console.log('error', error);
         if (error.code)
           return error;
       });

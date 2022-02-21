@@ -11,38 +11,39 @@ import {Router} from "@angular/router";
 export class SignInComponent implements OnInit {
 
   signInForm!: FormGroup;
-  errorMessage!: string;
+  errorMessage!: any;
+  isConnected!: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
               private router: Router) { }
 
   ngOnInit(): void {
-    this.initForm();
+    this.isConnected = false;
+    this.initUserFormSignIn();
   }
 
-  initForm() {
+  /**
+   * Create form sign-in
+   */
+  initUserFormSignIn() {
     this.signInForm = this.formBuilder.group( {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
     });
   }
 
-  onSubmit(){
+  async onSubmitUser(){
     const email = this.signInForm.get('email')!.value;
     const password = this.signInForm.get('password')!.value;
-    //const userUID = this.authService.getUserByUID(this.userUID);
-    this.authService.signInUser(email,password).then(
-      () => {
-        //console.log('test :');
-        this.router.navigate(['/book-list']);
-        //console.log('on submit :');
-        //console.log(this.router.navigate(['/book-list'+ userID]));
-      },
-      (error) => {
-        this.errorMessage = error;
-      }
-    );
+
+    const resultConnection = await this.authService.signInUser(email, password)
+
+    if(resultConnection == true){
+      await this.router.navigate(['/book-list'])
+    } else if(resultConnection == 'auth/user-not-found') {
+      this.errorMessage = 'Utilisateur non inscrit, veuillez vous inscrire';
+    }
   }
 
 }

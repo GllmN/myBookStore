@@ -8,7 +8,7 @@
   <mat-tab-group mat-stretch-tabs class="exemple-streched-tabs">
     <!--      <mat-tab label="S'inscrire" routerLink="test" routerLinkActive="active"></mat-tab>-->
     <mat-tab label="Se connecter">
-      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmitUser()">
         <mat-form-field>
           <input matInput type="text" id="email" placeholder="Email" name="email" class="form-control" formControlName="email" required>
           <mat-icon matSuffix>email</mat-icon>
@@ -19,6 +19,7 @@
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit" [disabled]="signInForm.invalid">Se connecter</button>
       </form>
+<!--      <div *ngIf="errorMessage" style="text-align: center"> {{errorMessage}}</div>-->
       <mat-error *ngIf="errorMessage" style="text-align: center"> {{errorMessage}}</mat-error>
     </mat-tab>
   </mat-tab-group>
