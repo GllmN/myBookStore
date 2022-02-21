@@ -140,9 +140,9 @@ export class BookFormComponent implements OnInit {
       const author = this.bookForm.get('author')!.value;
       const published: Date = this.bookForm.get('published')!.value;
       const listTag = this.listOfTagsSelected();
-      const pictureBook = this.bookForm.get('pictureBook')!.value
+      //const pictureBook = this.bookForm.get('pictureBook')!.value
 
-      const newBook = new Book(userUID,title,author,published,listTag,pictureBook);
+      const newBook = new Book(userUID,title,author,published,listTag);
       console.log('onSaveBook :', newBook)
 
       //
