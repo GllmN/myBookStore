@@ -50,7 +50,7 @@ export class AuthService {
       })
       .catch(error => {
         console.log('Auth Service: login error...');
-          return error.code;
+        return error.code;
       });
   }
 
@@ -65,8 +65,7 @@ export class AuthService {
       })
       .catch(error => {
         console.log('Auth Service: logout error...');
-        if (error.code)
-          return error;
+        return error;
       });
 
   }

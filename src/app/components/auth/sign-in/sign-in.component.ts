@@ -42,7 +42,9 @@ export class SignInComponent implements OnInit {
     if(resultConnection == true){
       await this.router.navigate(['/book-list'])
     } else if(resultConnection == 'auth/user-not-found') {
-      this.errorMessage = 'Utilisateur non inscrit, veuillez vous inscrire';
+      this.errorMessage = 'Utilisateur non inscrit, veuillez vous inscrire.';
+    } else if(resultConnection == 'auth/wrong-password') {
+      this.errorMessage = 'Mot de passe de incorrect, veuillez saisir le mot de passe de nouveau.';
     }
   }
 
