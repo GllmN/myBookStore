@@ -1,0 +1,52 @@
+.mat-toolbar {
+  margin-top: 200px;
+}
+
+.mat-toolbar-row {
+  height: 20px;
+}
+
+.mtr-middle-four {
+  align-items: center;
+  flex: 1 0 auto;
+  font-size: 0.7em;
+}
+
+.spacer-right {
+  flex: 1 1 auto;
+}
+
+.social-networks{
+  width: 20%;
+  padding-right: 2%;
+}
+
+.social-networks > ul {
+  display: inline-flex;
+  float: right;
+}
+
+
+#linkedin {
+  display: flex;
+  align-self: center;
+  width: 30px;
+  padding: 10px;
+  //background:  #1495ac
+}
+
+#github {
+  display: flex;
+  align-self: center;
+  width: 30px;
+  padding: 10px;
+  //background: #1495ac
+}
+
+#twitter {
+  display: flex;
+  align-self: center;
+  width: 30px;
+  padding: 10px;
+  //background: #1495ac
+}
