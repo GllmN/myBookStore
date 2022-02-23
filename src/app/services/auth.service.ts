@@ -24,16 +24,19 @@ export class AuthService {
    * @param email
    * @param password
    */
-  signUpUser(email: string, password: string): Promise<void> {
+  signUpUser(email: string, password: string): Promise<any> {
     return this.fireAuth.createUserWithEmailAndPassword(email, password)
       .then(() => {
-        this.fireAuth.onAuthStateChanged(
-          (user) => {
-            if(user) {
-              this.isConnected = true;
-            }
-          }
-        )
+        // this.fireAuth.onAuthStateChanged(
+        //   (user) => {
+        //     if(user) {
+        //     }
+        //   }
+        // )
+        return this.isConnected = true;
+      }).catch(error => {
+        console.log('Auth Service: login error...');
+        return error.code;
       });
   }
 

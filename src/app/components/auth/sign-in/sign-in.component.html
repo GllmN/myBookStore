@@ -9,17 +9,20 @@
     <!--      <mat-tab label="S'inscrire" routerLink="test" routerLinkActive="active"></mat-tab>-->
     <mat-tab label="Se connecter">
       <form [formGroup]="signInForm" (ngSubmit)="onSubmitUser()">
-        <mat-form-field>
+        <mat-form-field appearance="fill">
           <input matInput type="text" id="email" placeholder="Email" name="email" class="form-control" formControlName="email" required>
           <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="signInForm.hasError('required', 'email')">Veuillez saisir un email.</mat-error>
         </mat-form-field>
-        <mat-form-field>
+
+        <mat-form-field appearance="fill">
           <input matInput type="password" id="password" placeholder="Mot de passe" class="form-control" formControlName="password" required autocomplete="on">
           <mat-icon matSuffix>lock</mat-icon>
+          <mat-error *ngIf="signInForm.hasError('required', 'password')">Veuillez saisir un mot de passe.</mat-error>
         </mat-form-field>
+
         <button mat-raised-button color="primary" type="submit" [disabled]="signInForm.invalid">Se connecter</button>
       </form>
-<!--      <div *ngIf="errorMessage" style="text-align: center"> {{errorMessage}}</div>-->
       <mat-error *ngIf="errorMessage" style="text-align: center"> {{errorMessage}}</mat-error>
     </mat-tab>
   </mat-tab-group>

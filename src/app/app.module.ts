@@ -42,6 +42,7 @@ import {MatTabNavPanel} from "@angular/material/tabs";
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { environment } from '../environments/environment';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { environment } from '../environments/environment';
     ProfilViewComponent,
     ProfilDetailComponent,
     ProfilFormComponent,
+    FooterComponent,
 
   ],
   imports: [

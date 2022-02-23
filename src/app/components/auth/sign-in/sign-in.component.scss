@@ -14,14 +14,15 @@
 
 mat-card {
   width: 40%;
-  margin: 10% auto;
+  margin: 50px auto 0 auto;
   border-radius: 8px;
 }
 
 mat-form-field, mat-checkbox {
   display: block;
   width: 90%;
-  height: 50px;
+  height: 40px;
+  padding: 13px 0 13px 0;
   margin: 10px auto 0 auto;
 }
 
@@ -33,5 +34,6 @@ button {
   display: block;
   width: 90%;
   height: 50px;
-  margin: 20px auto 20px auto;
+  margin: 30px auto 20px auto;
+  text-transform: uppercase;
 }
