@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   isConnected!: boolean;
   auState: any;
 
   constructor(private router: Router,
+              private firestore: AngularFirestore,
               private fireAuth: AngularFireAuth) {}
 
   /**
@@ -27,12 +31,12 @@ export class AuthService {
   signUpUser(email: string, password: string): Promise<any> {
     return this.fireAuth.createUserWithEmailAndPassword(email, password)
       .then(() => {
-        // this.fireAuth.onAuthStateChanged(
-        //   (user) => {
-        //     if(user) {
-        //     }
-        //   }
-        // )
+        this.fireAuth.onAuthStateChanged(
+          (user) => {
+            if(user) {
+            }
+          }
+        )
         return this.isConnected = true;
       }).catch(error => {
         console.log('Auth Service: login error...');
@@ -72,4 +76,5 @@ export class AuthService {
       });
 
   }
+
 }

@@ -10,6 +10,8 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
 import {ProfilService} from "../../../services/profil.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {User} from "../../../models/User.model";
+
 
 @Component({
   selector: 'app-sign-up',
@@ -19,9 +21,8 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 export class SignUpComponent implements OnInit {
 
   signUpForm!: FormGroup;
-  matcherTest : any;
   errorMessage!: any;
-  userUID: any;
+  UID!: string;
   isConnected!: boolean;
 
   constructor(private formBuilder: FormBuilder,
@@ -35,7 +36,9 @@ export class SignUpComponent implements OnInit {
       (user) => {
         if(user) {
           this.isConnected = true;
-          this.userUID = user.uid;
+
+          this.UID = user.uid;
+
         } else {
           this.isConnected = false;
         }
@@ -72,19 +75,17 @@ export class SignUpComponent implements OnInit {
     const username = this.signUpForm.get('username')!.value;
     const email = this.signUpForm.get('email')!.value;
     const password = this.signUpForm.get('password')!.value;
-    const confirmPassword = this.signUpForm.get('confirmPassword')!.value;
 
-    if(password.value != confirmPassword.value){
-      this.errorMessage = 'Les mots de passe ne correspondent pas.';
-    } else {
+    const resultRegistration = await this.authService.signUpUser(email, password)
 
-      const resultRegistration = await this.authService.signUpUser(email, password)
+    if(resultRegistration == true){
+      this.router.navigate(['/book-list'])
 
-      if(resultRegistration == true){
-        this.router.navigate(['/book-list'])
-      } else if(resultRegistration == 'auth/email-already-in-use') {
-        this.errorMessage = 'Cet utilisateur existe déjà !'
-      }
+      const newUser = new User(username,email,this.UID)
+      this.profilService.createUserProfil(newUser)
+
+    } else if(resultRegistration == 'auth/email-already-in-use') {
+      this.errorMessage = 'Cet utilisateur existe déjà !'
     }
   }
 }
