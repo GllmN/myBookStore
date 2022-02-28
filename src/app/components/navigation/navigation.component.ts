@@ -58,8 +58,6 @@ export class NavigationComponent implements OnInit {
   }
 
 
-
-
   /**
    * Sign out user
    */

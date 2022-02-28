@@ -12,7 +12,6 @@ import {ProfilService} from "../../../services/profil.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {User} from "../../../models/User.model";
 
-
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',

@@ -1,45 +1,47 @@
-<mat-card class="mat-elevation-z12">
-  <mat-card-title style="text-align: center">
-    <span>
-      <mat-icon>auto_stories</mat-icon>
-      MyBookStore
-    </span>
-  </mat-card-title>
-  <mat-tab-group mat-stretch-tabs class="exemple-streched-tabs">
-    <mat-tab label="S'inscrire">
-      <form [formGroup]="signUpForm" (ngSubmit)="onSaveUserProfil()">
+<div class="app-sign-up">
+  <mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align: center">
+      <span>
+        <mat-icon>auto_stories</mat-icon>
+        MyBookStore
+      </span>
+    </mat-card-title>
+    <mat-tab-group mat-stretch-tabs class="exemple-streched-tabs">
+      <mat-tab label="S'inscrire">
+        <form [formGroup]="signUpForm" (ngSubmit)="onSaveUserProfil()">
 
-        <mat-form-field appearance="fill">
-          <input matInput type="text" id="username" placeholder="Nom de l'utilisateur" name="username" class="form-control" formControlName="username">
-          <mat-icon matSuffix>face</mat-icon>
-          <mat-error *ngIf="signUpForm.hasError('required', 'username')">Veuillez saisir un nom d'utilisateur.</mat-error>
-          <mat-error *ngIf="signUpForm.hasError('pattern', 'username')">Le nom d'utilisateur doit contenir au moins 6 caractères.</mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="fill">
+            <input matInput type="text" id="username" placeholder="Nom de l'utilisateur" name="username" class="form-control" formControlName="username">
+            <mat-icon matSuffix>face</mat-icon>
+            <mat-error class=field-error *ngIf="signUpForm.hasError('required', 'username')">Veuillez saisir un nom d'utilisateur.</mat-error>
+            <mat-error class=field-error *ngIf="signUpForm.hasError('pattern', 'username')">Le nom d'utilisateur doit contenir au moins 6 caractères.</mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <input matInput type="text" id="email" placeholder="Email" name="email" class="form-control" formControlName="email" required>
-          <mat-icon matSuffix>email</mat-icon>
-          <mat-error *ngIf="signUpForm.hasError('required', 'email')">Veuillez saisir un email.</mat-error>
-          <mat-error *ngIf="signUpForm.hasError('email', 'email')">Le format de cet email n'est pas correct.</mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="fill">
+            <input matInput type="text" id="email" placeholder="Email" name="email" class="form-control" formControlName="email" required>
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error class=field-error *ngIf="signUpForm.hasError('required', 'email')">Veuillez saisir un email.</mat-error>
+            <mat-error class=field-error *ngIf="signUpForm.hasError('email', 'email')">Le format de cet email n'est pas correct.</mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <input matInput type="password" id="password" placeholder="Mot de passe" class="form-control" formControlName="password" required autocomplete="on">
-          <mat-icon matSuffix>lock</mat-icon>
-          <mat-error *ngIf="signUpForm.hasError('required', 'password')">Veuillez saisir un mot de passe.</mat-error>
-          <mat-error *ngIf="signUpForm.hasError('pattern', 'password')">Le mot de passe doit comprendre au moins 6 caractères.</mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="fill">
+            <input matInput type="password" id="password" placeholder="Mot de passe" class="form-control" formControlName="password" required autocomplete="on">
+            <mat-icon matSuffix>lock</mat-icon>
+            <mat-error class=field-error *ngIf="signUpForm.hasError('required', 'password')">Veuillez saisir un mot de passe.</mat-error>
+            <mat-error class=field-error *ngIf="signUpForm.hasError('pattern', 'password')">Le mot de passe doit comprendre au moins 6 caractères.</mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <input matInput type="password" id="confirmPassword" placeholder="Confirmation du mot de passe" class="form-control" formControlName="confirmPassword" required autocomplete="on">
-          <mat-icon matSuffix>lock</mat-icon>
-          <mat-error *ngIf="signUpForm.hasError('notSame')">Les mots de passe ne correspondent pas!</mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="fill">
+            <input matInput type="password" id="confirmPassword" placeholder="Confirmation du mot de passe" class="form-control" formControlName="confirmPassword" required autocomplete="on">
+            <mat-icon matSuffix>lock</mat-icon>
+            <mat-error class=field-error *ngIf="signUpForm.hasError('notSame')">Les mots de passe ne correspondent pas!</mat-error>
+          </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">Créer mon compte</button>
-      </form>
-      <mat-error *ngIf="errorMessage" style="text-align: center"> {{errorMessage}}</mat-error>
-    </mat-tab>
-    <!--    <mat-tab label="Se connecter" routerLink="/signin" routerLinkActive="active"></mat-tab>-->
-  </mat-tab-group>
-</mat-card>
+          <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">Créer mon compte</button>
+        </form>
+        <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
+      </mat-tab>
+      <!--    <mat-tab label="Se connecter" routerLink="/signin" routerLinkActive="active"></mat-tab>-->
+    </mat-tab-group>
+  </mat-card>
+</div>

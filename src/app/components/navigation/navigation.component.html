@@ -15,8 +15,20 @@
   </ng-template>
   <ng-template routerLinkActive="active" #notConnected>
     <div class="spacer-central"></div>
-    <a mat-button routerLink="signup">Créer un compte</a>
-    <a mat-raised-button color="accent" routerLink="signin">Connexion</a>
+    <div class="nav-left">
+      <button
+        class="nav-connection"
+        mat-raised-button
+        routerLinkActive="active-link"
+        routerLink="signup"
+      >Créer un compte</button>
+      <button
+        class="nav-connection"
+        mat-raised-button
+        routerLinkActive="active-link"
+        routerLink="signin"
+      >Connexion</button>
+    </div>
   </ng-template>
 </mat-toolbar>
 
