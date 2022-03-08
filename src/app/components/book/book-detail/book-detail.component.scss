@@ -1,3 +1,7 @@
+button{
+  text-transform: uppercase;
+}
+
 mat-card {
   width: 35%;
   margin: 100px auto;
@@ -7,6 +11,8 @@ mat-card {
 
 h1 {
   margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #797979;
 }
 
 h3 {
@@ -20,6 +26,34 @@ span {
   justify-content: space-evenly;
 }
 
-img {
-  max-width: 400px;
+.book-detail{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
+
+.book-picture{
+  min-width: 30%;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.book-picture > h4{
+  text-align: center;
+  align-self: center;
+}
+
+.book-picture > img{
+  text-align: center;
+  align-self: center;
+}
+
+.book-description{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-bottom: 10px;
+}
+

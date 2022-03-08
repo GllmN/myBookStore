@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Book} from "../../../models/Book.model";
 import {Subscription} from "rxjs";
 import {BooksService} from "../../../services/books.service";
@@ -27,10 +27,8 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.fireAuth.onAuthStateChanged(
       (user) => {
         if (user) {
-          this.isConnected = true;
-
           const userUID = user.uid;
-
+          this.isConnected = true;
           this.booksSubscription = this.booksService.getAllBooksOfCurrentUser(userUID).subscribe(
             Book => {
               this.books = Book;
@@ -57,13 +55,13 @@ export class BookListComponent implements OnInit, OnDestroy {
       this.booksService.deleteBook(book);
     }
   }
-  
+
   /**
    * Unsubscribe
    */
   ngOnDestroy() {
     console.log('ngDestroy called')
-    //this.booksSubscription.unsubscribe();
+    this.booksSubscription.unsubscribe();
   }
 
 }

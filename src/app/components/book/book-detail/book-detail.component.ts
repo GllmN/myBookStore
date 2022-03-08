@@ -15,6 +15,7 @@ export class BookDetailComponent implements OnInit {
   book: any;
   date!: Date;
   tags!: string[];
+  pictureBook!: string[];
 
   constructor(private activatedRoute: ActivatedRoute,
               private booksService: BooksService,
@@ -31,6 +32,7 @@ export class BookDetailComponent implements OnInit {
         this.book = book;
         console.log(this.book);
         this.tags = this.book.listTag!;
+        this.pictureBook = this.book.pictureBook;
 
         // Transforms the JSON object into an array
         // this.index = Object.keys(this.book);

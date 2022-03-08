@@ -5,18 +5,29 @@
       Détail du livre
     </h1>
   </mat-card-title>
-  <img [src]="book.photo" *ngIf="book.photo">
-  <h3><strong>Titre : </strong> {{book.title}}</h3>
-  <h3><strong>Auteur : </strong> {{book.author}}</h3>
-  <h3><strong>Date de publication : </strong> {{book.published.toDate() | date:'dd/MM/yyyy'}}</h3>
-  <h3>
-    <strong>Tag list : </strong>
-    <mat-chip-list>
-      <mat-chip *ngFor="let tag of tags">
-        {{tag}}
-      </mat-chip>
-    </mat-chip-list>
-  </h3>
+  <div class="book-detail">
+    <div class="book-picture">
+      <img [src]="book.pictureBook" *ngIf="book.pictureBook" alt="pictureBook">
+      <h4 *ngIf="!book.pictureBook">Aucune illustration pour ce livre</h4>
+    </div>
+
+
+    <div class="book-description">
+      <h3><strong>Titre : </strong> {{book.title}}</h3>
+      <h3><strong>Auteur : </strong> {{book.author}}</h3>
+      <h3><strong>Date de publication : </strong> {{book.published.toDate() | date:'dd/MM/yyyy'}}</h3>
+      <h3>
+        <strong>Tag list : </strong>
+        <mat-chip-list>
+          <mat-chip *ngFor="let tag of tags">
+            {{tag}}
+          </mat-chip>
+        </mat-chip-list>
+      </h3>
+    </div>
+  </div>
+
+
   <span>
     <button mat-raised-button color="primary" (click)="onBack()">Retour aux livres</button>
     <button mat-raised-button color="accent" routerLink="/book-form/{{idDocBook}}">Modifier</button>
