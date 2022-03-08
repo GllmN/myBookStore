@@ -1,3 +1,5 @@
+import {Observable} from "rxjs";
+
 export class Book {
   constructor(
     public userUID: string,
@@ -5,7 +7,7 @@ export class Book {
     public author: string,
     public published: Date,
     public listTag?: string[],
-    public pictureBook?: string,
+    public urlPictureStorage?: string,
     public id?: string,
     public payload?: any,
   ){}

@@ -43,6 +43,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { environment } from '../environments/environment';
 import { FooterComponent } from './components/footer/footer.component';
+import {ProfilService} from "./services/profil.service";
 
 
 @NgModule({
@@ -92,6 +93,7 @@ import { FooterComponent } from './components/footer/footer.component';
     AuthService,
     BooksService,
     AuthGuardService,
+    ProfilService,
   ],
   bootstrap: [AppComponent]
 })

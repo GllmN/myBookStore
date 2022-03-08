@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import {Book} from "../../../models/Book.model";
@@ -11,6 +11,9 @@ import {MatChipInputEvent} from "@angular/material/chips";
 
 //Format date
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import {fileURLToPath} from "url";
+import {finalize} from "rxjs";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
 
 // export const MY_DATE_FORMATS = {
 //   parse: {
@@ -32,7 +35,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
   //   { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
   // ]
 })
-export class BookFormComponent implements OnInit {
+export class BookFormComponent implements OnInit,OnDestroy {
 
   idBook!: any;
   book!: Book;
@@ -50,9 +53,7 @@ export class BookFormComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  //For file
-  fileIsUploading = false;
-  fileUploaded = false;
+  //For pictureBook
   fileUrl!: string;
 
   constructor(private formBuilder: FormBuilder,
@@ -92,7 +93,6 @@ export class BookFormComponent implements OnInit {
                   'Philosophie', 'Science fiction', 'Top Seller',
                   'Coup coeur', 'Prix Goncourt']
                 this.initBookFormAdd()
-                console.log('test')
               }
             }
           );
@@ -124,31 +124,26 @@ export class BookFormComponent implements OnInit {
       author : ['',Validators.required],
       published : ['',Validators.required],
       listTag : [this.tags,Validators.required],
-      // pictureBook : ['',Validators.required]
+      pictureBook : ['']
     });
   }
 
   /**
    * Form for new book
    */
-  onSaveBook(): void {
+  async onSaveBook(): Promise<void> {
     const id = this.activatedRoute.snapshot.params['id'];
 
-    if(this.isAddBook){
+    if (this.isAddBook) {
       const userUID = this.UID;
       const title = this.bookForm.get('title')!.value;
       const author = this.bookForm.get('author')!.value;
       const published: Date = this.bookForm.get('published')!.value;
       const listTag = this.listOfTagsSelected();
-      //const pictureBook = this.bookForm.get('pictureBook')!.value
+      const urlPictureStorage = this.booksService.urlPictureBookStorage;
 
-      const newBook = new Book(userUID,title,author,published,listTag);
+      const newBook = new Book(userUID, title, author, published, listTag, urlPictureStorage);
       console.log('onSaveBook :', newBook)
-
-      //
-      if (this.fileUrl && this.fileUrl !== '') {
-        newBook.pictureBook = this.fileUrl;
-      }
 
       // Send object to database and redirect to detail
       this.booksService.createBook(newBook).then(
@@ -160,6 +155,7 @@ export class BookFormComponent implements OnInit {
       this.book.author = this.bookForm.get('author')!.value;
       this.book.published = this.bookForm.get('published')!.value;
       this.book.listTag = this.listOfTagsSelected();
+      //this.book.pictureBook = this.booksService.getDownloadUrl()
 
       // Update object to database and redirect to detail
       this.booksService.updateBook(this.book, id).then(
@@ -190,7 +186,6 @@ export class BookFormComponent implements OnInit {
    */
   deleteTag(tag: string): void {
     const index = this.tags.indexOf(tag);
-
     if (index >= 0) {
       this.tags.splice(index, 1);
     }
@@ -205,19 +200,31 @@ export class BookFormComponent implements OnInit {
 
   /****************** Upload File ***************/
 
-  onUploadFile(file: File) {
-    this.fileIsUploading = true
-    return this.booksService.uploadFile(file)
-    //   .then(
-    //   (url: any) => {
-    //     this.fileUrl = url;
-    //     this.fileIsUploading = false;
-    //     this.fileUploaded = true;
-    //   }
-    // );
+  /**
+   * Picture's book selected
+   * @param file
+   */
+  pictureBookSelected(file:File) {
+    return this.booksService.uploadPictureBook(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        console.log(this.fileUrl)
+      }
+    );
   }
 
-  detectFiles(event: any) {
-    this.onUploadFile(event.target.files[0]);
+  /**
+   * Picture's book selected
+   * @param event
+   */
+  detectFile(event: any) {
+    this.pictureBookSelected(event.target.files[0])
   }
+
+  /******************************************/
+
+  ngOnDestroy() {
+    console.log('ngOnDestroyCalled')
+  }
+
 }

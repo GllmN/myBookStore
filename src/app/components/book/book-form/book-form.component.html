@@ -52,9 +52,41 @@
       </mat-chip-list>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" *ngIf="this.isAddBook == true" [disabled]="bookForm.invalid" >Ajouter</button>
+    <div class="add-picture-book">
+      <label>
+        <h4>Ajouter une photo</h4>
+        <div class="state-upload-picture-book">
+<!--          <div *ngIf="fileUploaded">Fichier chargé-->
+<!--            <div>{{ uploadPercent | async }}%</div>-->
+<!--          </div>-->
+<!--          <div *ngIf="fileIsUploading == true">Fichier en cours de chargement :-->
+<!--            <div>{{ uploadPercent | async }}%</div>-->
+<!--          </div>-->
+        </div>
+      </label>
+      <div class="select-picture-book">
+        <input type="file"
+               id="pictureBook"
+               name="pictureBook"
+               class="select-picture-book"
+               (change)="detectFile($event)"
+               accept="image/png, image/jpeg">
+        <!--      <a [href]="downloadURL | async">{{ downloadURL | async }}</a>-->
+      </div>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      *ngIf="this.isAddBook == true"
+      [disabled]="bookForm.invalid">Ajouter</button>
 
-    <button mat-raised-button color="primary" type="submit" *ngIf="this.isAddBook == false" [disabled]="bookForm.invalid" >Modifier</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      *ngIf="this.isAddBook == false"
+      [disabled]="bookForm.invalid">Modifier</button>
   </form>
 </mat-card>
 

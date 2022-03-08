@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Book} from "../models/Book.model";
-import {Observable} from "rxjs";
+import {finalize, Observable, Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
+
 
 
 @Injectable({
@@ -15,6 +16,10 @@ export class BooksService {
   books: Book[] = [];
   isActive!: boolean;
   //urlDatabaseFire = environment.firebase;
+  uploadPercent!: Observable<any>
+  downloadURL!: Subscription
+  urlPictureBookStorage: any;
+
 
   constructor(private firestore: AngularFirestore,
               private storage : AngularFireStorage,
@@ -70,7 +75,7 @@ export class BooksService {
         author: book.author,
         published: book.published,
         listTag: book.listTag,
-       // pictureBook: book.pictureBook,
+        urlPictureStorage: book.urlPictureStorage,
       })
     //.then(() => alert(`Le livre ${book.title} a été ajouté`))
     //.catch((error) => alert("error: " + error));
@@ -90,7 +95,7 @@ export class BooksService {
         author: book.author,
         published: book.published,
         listTag: book.listTag,
-        //pictureBook: book.pictureBook
+        urlPictureStorage: book.urlPictureStorage
       });
   }
 
@@ -126,52 +131,52 @@ export class BooksService {
   }
 
   /**
-   *
+   * Upload picture book in a Storage
+   * @param: file: file of a picture book
    */
-  // uploadFile(file:File) {
-  //   return new Promise(
-  //     ((resolve, reject) =>  {
-  //       const almostUniqurFileName = Date.now().toString();
-  //       const upload = firebase
-  //         .storage()
-  //         .ref()
-  //         .child('images/' + almostUniqurFileName + file.name)
-  //         .put(file);
-  //       upload.on(this.fireStorage.TaskEvent.STATE_CHANGED,
-  //         () => {
-  //         console.log('Chargement...')
-  //         },
-  //         (error) => {
-  //           console.log('Erreur de chargement : ' + error);
-  //           reject();
-  //         },
-  //         () => {
-  //         resolve(upload.snapshot.ref.getDownloadURL());
-  //         }
-  //       )
-  //     })
-  //   )
-  // }
-  uploadFile(event: any) {
+  uploadPictureBook(file:File) {
     const almostUniqueFileName = Date.now().toString();
-    const file = event.target.files[0];
-    const filePath = 'images/' + almostUniqueFileName + file.name;
-    const task = this.storage.upload(filePath, file);
-  }
 
-  // upLoadImage(file:File, id:string): Promise<any> {
-  //   const uniqueFileName = Date.now()
-  //     .toString()
-  //     + this.firestore
-  //     .collection<Book>('/book-list')
-  //     .doc(id);
-  //   const path = '/images' + uniqueFileName + file.name
-  //   return this.storage.upload(path, file).then((data) => this.getStorageMetadata(path))
-  // }
+    // create path
+    const filePath = 'picturesBooks/' + almostUniqueFileName + '_' + file.name;
+    const fileRef = this.storage.ref(filePath);
+
+    return new Promise<any>((resolve, reject) => {
+      const task = this.storage.upload(filePath, file);
+
+      // observe percentage changes
+      this.uploadPercent = task.percentageChanges();
+
+      // get notified when the download URL is available
+      task.snapshotChanges()
+        .pipe(
+          finalize(
+            () => {
+              return this.downloadURL = fileRef.getDownloadURL().subscribe(
+                url => {
+                  this.urlPictureBookStorage = url;
+                  console.log('upload success')
+                  console.log(this.urlPictureBookStorage)
+                  return this.urlPictureBookStorage
+                },
+              );
+            }
+          )
+        )
+        .subscribe(
+          url => {
+            this.urlPictureBookStorage = url;
+            console.log('upload running')
+          }
+        )
+    });
+  }
 
   getDownloadUrl(storagePath: string): Promise<string> {
     return this.storage.ref(storagePath).getDownloadURL().toPromise();
   }
+
+
 
 
 
