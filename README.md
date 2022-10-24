@@ -1,5 +1,7 @@
 # MyBookStore
 
+**Web app Angular and Firebase. Goal of project : manipulate CRUD with objects of book, and an access of Web App with space of authentification**
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.3.
 
 ## Development server
